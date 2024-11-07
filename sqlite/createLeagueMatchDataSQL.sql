@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS league_matchdata;
+CREATE TABLE league_matchdata (id INTEGER PRIMARY KEY, matchid TEXT NOT NULL, puuid TEXT NOT NULL , gamename TEXT NOT NULL , tagline TEXT NOT NULL , position TEXT NOT NULL, champname TEXT NOT NULL , teamcolor TEXT NOT NULL , totaldmgdealttochamps INTEGER NOT NULL);
