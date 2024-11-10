@@ -60,7 +60,7 @@ for gameNum in range(0 , 20):
         print(f"Failed to retrieve data. Status code: {response.status_code}")
         print(response.text)
 
-conn = sqlite3.connect('sqlite/example.db')
+conn = sqlite3.connect('sqlite/main.db')
 cursor = conn.cursor()
 outfile = open("JSONs/raw-match-data.txt", "r", encoding="utf-8")
 lines = outfile.readlines()
