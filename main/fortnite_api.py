@@ -25,7 +25,7 @@ params = {
 }
 
 # Connect to SQLite database
-conn = sqlite3.connect('../sqlite/main.db')
+conn = sqlite3.connect('sqlite/main.db')
 cursor = conn.cursor()
 
 # Create table if it doesn't exist
