@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riot</title>
+</head>
+<body>
+    <div>
+        <form action="{{ url_for('get_riot_data') }}" method="POST">
+            <h1>League Account Info</h1>
+            Game Name<br>
+            <input type = "text" name = "gamename" /><br>
+
+            <br>Tag Line<br>
+            <input type = "text" name = "tagline" /><br>
+
+            <br>Region<br>
+            <input type = "text" name = "region" /><br>
+            <br><a href=lol_match_history><input type = "submit" value="Enter"></a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,7 +1,6 @@
 import sqlite3
 import requests
 import json
-import sys
 import os
 from riot_functions import *
 
@@ -67,11 +66,11 @@ lines = outfile.readlines()
 count = 0
 insertQuery = '''INSERT INTO league_matchdata (matchid, puuid, gamename, tagline, position, champname, teamcolor, totaldmgdealttochamps)
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)'''
-dropQuery = '''DROP TABLE IF EXISTS league_matchdata'''
-createQuery = '''CREATE TABLE league_matchdata (id INTEGER PRIMARY KEY, matchid TEXT NOT NULL, puuid TEXT NOT NULL, gamename TEXT NOT NULL, tagline TEXT NOT NULL, 
+deleteQuery = '''DELETE FROM league_matchdata WHERE id > 0'''
+createQuery = '''CREATE TABLE IF NOT EXISTS league_matchdata (id INTEGER PRIMARY KEY, matchid TEXT NOT NULL, puuid TEXT NOT NULL, gamename TEXT NOT NULL, tagline TEXT NOT NULL, 
                  position TEXT NOT NULL, champname TEXT NOT NULL, teamcolor TEXT NOT NULL, totaldmgdealttochamps INTEGER NOT NULL)'''
-cursor.execute(dropQuery)
 cursor.execute(createQuery)
+cursor.execute(deleteQuery)
 conn.commit()
 for line in lines:
     if response.status_code == 200:

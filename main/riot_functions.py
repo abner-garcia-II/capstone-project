@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import os
 import json
 import requests
+import sqlite3
 
 load_dotenv()
 
@@ -31,12 +32,12 @@ def clearPlayerData():
     file.close()
     return 0
 
-def getPuuid():
+def getPuuid(gameNameInput, tagLineInput):
     global gameName 
-    gameName = input("Please enter your game name: ")
+    gameName = gameNameInput#input("Please enter your game name: ")
 
     global tagLine 
-    tagLine = input('\nPlease enter your tagline. (The part of your username that comes after the #): ')
+    tagLine = tagLineInput#input('\nPlease enter your tagline. (The part of your username that comes after the #): ')
 
     link = f'https://americas.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}?api_key={apiKey}'
 
@@ -50,9 +51,9 @@ def getPuuid():
         print(response.text)
     return puuid
 
-def getRegion():
+def getRegion(regionInput):
     global region 
-    region = input('\nList of regions: BR1, EUN1, EUW1, JP1, KR, LA1, LA2, ME1, NA1, OC1, PH2, RU, SG2, TH2, TR1, TW2, VN2\nPlease enter the region your account is in: ').upper()
+    region = regionInput#input('\nList of regions: BR1, EUN1, EUW1, JP1, KR, LA1, LA2, ME1, NA1, OC1, PH2, RU, SG2, TH2, TR1, TW2, VN2\nPlease enter the region your account is in: ').upper()
     
     if region in ['BR1', 'LA1', 'LA2', 'NA1']:
         region = 'americas'
@@ -64,7 +65,9 @@ def getRegion():
         region = 'sea'
     return region
         
-def getMatchHistoryFromPuuid(start=0, count=20):
+def getMatchHistoryFromPuuid(gameNameParam, tagLineParam, regionParam, start=0, count=20):
+    region = getRegion(regionParam)
+    puuid = getPuuid(gameNameParam, tagLineParam)
     
     rooturl = f'https://{region}.api.riotgames.com'
     endpoint = f'/lol/match/v5/matches/by-puuid/{puuid}/ids'
@@ -74,9 +77,10 @@ def getMatchHistoryFromPuuid(start=0, count=20):
     
     return matchId.json()
 
-def getRecentMatchDataFromId():
+def getRecentMatchDataFromId(gameNameParam, tagLineParam, regionParam):
+    region = getRegion(regionParam)
     
-    match = getMatchHistoryFromPuuid()[0]
+    match = getMatchHistoryFromPuuid(gameNameParam, tagLineParam, region)[0]
     
     root_url = f'https://{region}.api.riotgames.com'
     endpoint = f'/lol/match/v5/matches/{match}'
@@ -183,3 +187,95 @@ def getRawMatchDataToTxt():
             print(f"Failed to retrieve data. Status code: {response.status_code}")
             print(response.text)
     return matchData
+
+def insertMatchHistoryToDB(gameNameParam, tagLineParam, regionParam):
+    clearRawData()
+    clearJsonData()
+    getPuuid(gameNameParam, tagLineParam)
+    region = getRegion(regionParam)
+    matchId = getMatchHistoryFromPuuid(gameNameParam, tagLineParam, region)
+    getRecentMatchDataFromId(gameNameParam, tagLineParam, region)
+    for gameNum in range(0 , 20):
+        root_url = f'https://{region}.api.riotgames.com'
+        endpoint = f'/lol/match/v5/matches/{matchId[gameNum]}'
+        response = requests.get(root_url + endpoint + '?api_key=' + apiKey)
+        data = response.json()
+        if response.status_code == 200:
+            for player in range (0, 10):
+                file = open("JSONs/raw-match-data.txt", "a", encoding="utf-8")
+                matchPk = f'{json.dumps(data['metadata']['matchId'], indent=2).replace('"', '')}'
+                puuId = f'{json.dumps(data['metadata']['participants'][player], indent=2).replace('"', '')}'
+                gameNameChar = f'{json.dumps(data["info"]["participants"][player]["riotIdGameName"], indent=2).replace('"','')}'
+                tagLineChar = f'{json.dumps(data["info"]["participants"][player]["riotIdTagline"], indent=2).replace('"','')}'
+                position = f'{json.dumps(data["info"]["participants"][player]["teamPosition"], indent=2).replace('"','')}'
+                if position == '':
+                    position = 'NONE'
+                championName = f'{json.dumps(data["info"]["participants"][player]["championName"], indent=2).replace('"','')}'
+                teamId = f'{json.dumps(data["info"]["participants"][player]["teamId"], indent=2).replace('"','')}'
+                if teamId == '100':
+                    teamId = 'BLUE'
+                elif teamId == '200':
+                    teamId = 'RED'
+                totalDmgDealtToChamps = f'{json.dumps(data["info"]["participants"][player]["totalDamageDealtToChampions"], indent=2).replace('"','')}'
+                matchData = f'{matchPk}\n{puuId}\n{gameNameChar}\n{tagLineChar}\n{position}\n{championName}\n{teamId}\n{totalDmgDealtToChamps}\n'
+                file.write(matchData)
+                file.close()
+        else:
+            print(f"Failed to retrieve data. Status code: {response.status_code}")
+            print(response.text)
+
+    conn = sqlite3.connect('sqlite/main.db')
+    cursor = conn.cursor()
+    outfile = open("JSONs/raw-match-data.txt", "r", encoding="utf-8")
+    lines = outfile.readlines()
+    count = 0
+    insertQuery = '''INSERT INTO league_matchdata (matchid, puuid, gamename, tagline, position, champname, teamcolor, totaldmgdealttochamps)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)'''
+    deleteQuery = '''DELETE FROM league_matchdata WHERE id > 0'''
+    createQuery = '''CREATE TABLE IF NOT EXISTS league_matchdata (id INTEGER PRIMARY KEY, matchid TEXT NOT NULL, puuid TEXT NOT NULL, gamename TEXT NOT NULL, tagline TEXT NOT NULL, 
+                    position TEXT NOT NULL, champname TEXT NOT NULL, teamcolor TEXT NOT NULL, totaldmgdealttochamps INTEGER NOT NULL)'''
+    cursor.execute(createQuery)
+    cursor.execute(deleteQuery)
+    conn.commit()
+    for line in lines:
+        try:
+            if response.status_code == 200:
+                matchid = lines[count]
+                count += 1
+                puuid = lines[count]
+                count += 1
+                gamename = lines[count]
+                count += 1
+                tagline = lines[count]
+                count += 1
+                pos = lines[count]
+                count += 1
+                champname = lines[count]
+                count += 1
+                team = lines[count]
+                count += 1
+                totaldmgdealttochamps = lines[count]
+                count += 1
+                cursor.execute(insertQuery, (matchid, puuid, gamename, tagline, pos, champname, team, totaldmgdealttochamps))
+                conn.commit()
+            else:
+                print(f"Failed to retrieve data. Status code: {response.status_code}")
+                print(response.text)
+        except IndexError:
+            print("Data successfully entered into database!")
+            conn.close()
+            break
+
+            
+def getMatchHistoryFromDB():
+    conn = sqlite3.connect("sqlite/main.db")
+    cursor = conn.cursor()
+    getQuery = """SELECT matchid, puuid, gamename, tagline, position, champname, teamcolor, totaldmgdealttochamps FROM league_matchdata;"""
+    cursor.execute(getQuery)
+    sqlData = cursor.fetchall()
+    conn.close()
+    for entries in range(0, 200):
+        for column in range(0, 8):
+           sqlList = f'{sqlData[entries][column]}'.strip()
+    
+    return sqlList

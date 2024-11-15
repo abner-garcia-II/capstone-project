@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steam</title>
+</head>
+<body>
+    <h1>
+        Owned Steam Games
+    </h1>
+    <br/>
+    {% for game in games %}
+    <div class='game'>
+            <h3>
+                {{ game['steamID'] }}, {{ game['appid'] }}, {{ game['name'] }}, {{ game['playtime_hours'] }}
+            </h3>
+            <br>
+        </div>
+    {% endfor %}
+</body>
+</html>

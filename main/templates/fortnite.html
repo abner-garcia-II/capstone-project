@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoL</title>
+</head>
+<body>
+    <h1>
+        Fortnite Account Statistics
+    </h1>
+    <br/>
+    {% for stat in stats %}
+    <div class='stat'>
+            <h3>
+                {{ stat['username'] }}, {{ stat['score'] }}, {{ stat['matches'] }}, {{ stat['winRate'] }}, {{ stat['kdRatio'] }}
+            </h3>
+            <br>
+        </div>
+    {% endfor %}
+</body>
+</html>
