@@ -1,3 +1,3 @@
 from riot_functions import *
 
-print(getMatchHistoryFromDB())
+insertMatchHistoryToDB("Extreme", "8574", "NA1")

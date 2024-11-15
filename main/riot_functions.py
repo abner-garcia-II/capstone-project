@@ -77,19 +77,21 @@ def getMatchHistoryFromPuuid(gameNameParam, tagLineParam, regionParam, start=0, 
     
     return matchId.json()
 
-def getRecentMatchDataFromId(gameNameParam, tagLineParam, regionParam):
+def getMatchDataFromId(gameNameParam, tagLineParam, regionParam):
     region = getRegion(regionParam)
     
-    match = getMatchHistoryFromPuuid(gameNameParam, tagLineParam, region)[0]
+    match = getMatchHistoryFromPuuid(gameNameParam, tagLineParam, region)
     
-    root_url = f'https://{region}.api.riotgames.com'
-    endpoint = f'/lol/match/v5/matches/{match}'
-    
-    response = requests.get(root_url + endpoint + '?api_key=' + apiKey).json()
-    data = json.dumps(response, indent=2)
-    #specific_data = json.dumps(response["info"]["participants"][1], indent=2)
-    with open("JSONs/league-game-data.json", "w") as outfile:
-        outfile.write(data)
+    for gameNum in range(0, 20):
+        root_url = f'https://{region}.api.riotgames.com'
+        endpoint = f'/lol/match/v5/matches/{match[gameNum]}'
+        
+        response = requests.get(root_url + endpoint + '?api_key=' + apiKey).json()
+        data = json.dumps(response, indent=2)
+        #specific_data = json.dumps(response["info"]["participants"][1], indent=2)
+        with open("JSONs/league-game-data.json", "a") as outfile:
+            outfile.write(data)
+    outfile.close()
 
 def getPlayers():
     clearPlayerData()
@@ -112,7 +114,7 @@ def getParsedDataToTxt():
     getPuuid()
     getRegion()
     matchId = getMatchHistoryFromPuuid()
-    getRecentMatchDataFromId()
+    getMatchDataFromId()
     for gameNum in range(0 ,20):
         root_url = f'https://{region}.api.riotgames.com'
         endpoint = f'/lol/match/v5/matches/{matchId[gameNum]}'
@@ -153,7 +155,7 @@ def getRawMatchDataToTxt():
     getPuuid()
     getRegion()
     matchId = getMatchHistoryFromPuuid()
-    getRecentMatchDataFromId()
+    getMatchDataFromId()
     for gameNum in range(0 ,20):
         root_url = f'https://{region}.api.riotgames.com'
         endpoint = f'/lol/match/v5/matches/{matchId[gameNum]}'
@@ -194,7 +196,7 @@ def insertMatchHistoryToDB(gameNameParam, tagLineParam, regionParam):
     getPuuid(gameNameParam, tagLineParam)
     region = getRegion(regionParam)
     matchId = getMatchHistoryFromPuuid(gameNameParam, tagLineParam, region)
-    getRecentMatchDataFromId(gameNameParam, tagLineParam, region)
+    getMatchDataFromId(gameNameParam, tagLineParam, region)
     for gameNum in range(0 , 20):
         root_url = f'https://{region}.api.riotgames.com'
         endpoint = f'/lol/match/v5/matches/{matchId[gameNum]}'

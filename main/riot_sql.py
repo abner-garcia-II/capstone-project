@@ -29,7 +29,7 @@ clearJsonData()
 getPuuid()
 region = getRegion()
 matchId = getMatchHistoryFromPuuid()
-getRecentMatchDataFromId()
+getMatchDataFromId()
 for gameNum in range(0 , 20):
     root_url = f'https://{region}.api.riotgames.com'
     endpoint = f'/lol/match/v5/matches/{matchId[gameNum]}'
