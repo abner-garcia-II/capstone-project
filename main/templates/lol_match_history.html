@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoL</title>
+    <title>LoL Match History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='lol_styles.css')}}" />
 </head>
 <body>
-    <h1>
-        League of Legends Match History
-    </h1>
-    <br/>
+    <div class="logo">
+        <h1>
+            League of Legends Match History
+        </h1>
+    </div>
+    <br>
     {% for match in matches %}
-    <div class='match'>
-            <h3>
-                {{ match['gamename'] }}, {{ match['tagline'] }}, {{ match['position'] }}, {{ match['champname'] }}, {{ match['teamcolor'] }}, {{ match['totaldmgdealttochamps'] }}
-            </h3>
-            <br>
-        </div>
+    <div class='matches'>
+        <h3>
+            {{ match['gamename'] }} {{ match['tagline'] }} {{ match['position'] }} {{ match['champname'] }} {{ match['teamcolor'] }} {{ match['totaldmgdealttochamps'] }}
+        </h3>
+        <br>
+    </div>
     {% endfor %}
 </body>
 </html>

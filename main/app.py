@@ -41,16 +41,16 @@ def get_xbl_data():
 
 @app.route("/lol_match_history", methods = ['POST', 'GET'])
 def get_riot_data():
-    #if request.method == 'POST':
-        #try:
-            #GameName = request.form['gamename']
-            #Tagline = request.form['tagline']
-            #Region = request.form['region']
+    if request.method == 'POST':
+        try:
+            GameName = request.form['gamename']
+            Tagline = request.form['tagline']
+            Region = request.form['region']
             
-            #insertMatchHistoryToDB(GameName, Tagline, Region)
-            #msg = "Match History Successfully Fetched! Displaying now."
-        #except:
-            #msg = "ERROR: Match History was unable to be fetched. Please check to make sure all fields were entered in correctly."
+            insertMatchHistoryToDB(GameName, Tagline, Region)
+            msg = "Match History Successfully Fetched! Displaying now."
+        except:
+            msg = "ERROR: Match History was unable to be fetched. Please check to make sure all fields were entered in correctly."
     conn = getDbConn()
     riotData = conn.execute('SELECT gamename, tagline, position, champname, teamcolor, totaldmgdealttochamps FROM league_matchdata').fetchall()
     conn.close()
