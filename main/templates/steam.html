@@ -3,20 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Steam</title>
+    <title>Steam Games</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='steam.css')}}" />
 </head>
 <body>
-    <h1>
-        Owned Steam Games
-    </h1>
-    <br/>
-    {% for game in games %}
-    <div class='game'>
-            <h3>
-                {{ game['steamID'] }}, {{ game['appid'] }}, {{ game['name'] }}, {{ game['playtime_hours'] }}
-            </h3>
-            <br>
-        </div>
-    {% endfor %}
+    <header>
+        <h1>Steam Games Library</h1>
+    </header>
+
+    <main>
+        <section>
+            <form id="steamIDForm">
+                <label for="steamID">Enter your SteamID:</label>
+                <input type="text" id="steamID" name="steamID" placeholder="Enter SteamID" required>
+                <button type="submit">Fetch Games</button>
+            </form>
+        </section>
+
+        <section id="gamesSection">
+            <h2>Owned Games</h2>
+            <div id="gamesList">
+                <!-- Games will be dynamically inserted here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Steam Games Viewer</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('steamIDForm');
+        const gamesList = document.getElementById('gamesList');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const steamID = document.getElementById('steamID').value.trim();
+
+            if (!steamID) {
+                alert('Please enter a valid SteamID.');
+                return;
+            }
+
+            // Fetch games from the backend
+            const response = await fetch(`/get-games?steamID=${encodeURIComponent(steamID)}`);
+            const data = await response.json();
+
+            gamesList.innerHTML = ''; // Clear previous games
+
+            if (data.error) {
+                gamesList.innerHTML = `<p>Error: ${data.error}</p>`;
+                return;
+            }
+
+            if (data.games && data.games.length > 0) {
+                data.games.forEach(game => {
+                    const gameElement = document.createElement('div');
+                    gameElement.classList.add('game-item');
+                    gameElement.innerHTML = `
+                        <h3>${game.name}</h3>
+                        <p>App ID: ${game.appid}</p>
+                        <p>Playtime: ${game.playtime_hours.toFixed(2)} hours</p>
+                    `;
+                    gamesList.appendChild(gameElement);
+                });
+            } else {
+                gamesList.innerHTML = '<p>No games found for this SteamID.</p>';
+            }
+        });
+    </script>
 </body>
 </html>

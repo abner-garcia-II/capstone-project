@@ -3,6 +3,7 @@ import os
 import requests
 import sqlite3
 
+# Load environment variables
 load_dotenv()
 
 apiKey = os.environ.get('STEAM_API_KEY')
@@ -10,7 +11,11 @@ apiKey = os.environ.get('STEAM_API_KEY')
 if apiKey is None:
     raise ValueError("API Key not found. Make sure to set the STEAM_API_KEY in your .env file.")
 
-steamID = '76561198142725355'  # My SteamID
+# Prompt the user to input their SteamID
+steamID = input("Please enter your SteamID: ").strip()
+
+if not steamID.isdigit():
+    raise ValueError("Invalid SteamID. Please enter a numeric SteamID.")
 
 link = f'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key={apiKey}&steamid={steamID}&format=json&include_appinfo=true'
 
@@ -24,11 +29,8 @@ if response.status_code == 200:
     if owned_games:
         print(f"Owned Games for SteamID {steamID}:")
 
-        # Define the path to the SQLite database file
-        db_path = os.path.join("sqlite", "main.db")
-
-        # Connect to SQLite using the database path
-        db = sqlite3.connect(db_path)
+        # Connect to SQLite
+        db = sqlite3.connect("steamdb.sqlite")
         cursor = db.cursor()
 
         # Create table if it doesn't exist
