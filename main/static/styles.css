@@ -1,0 +1,181 @@
+h1 {
+  text-align: center;
+}
+
+.navbar ul {
+  list-style-type: none;
+  background-color: gray;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 15px;
+  display: block;
+  text-align: center;
+}
+
+.navbar a:hover {
+  background-color: darkslategray;
+}
+
+.navbar li {
+  float: left;
+}
+
+.logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fadein-logos {
+  position: absolute;
+  display: inline-block;
+  padding-inline-start: 300px;
+  padding-inline-end: 150px;
+  top: 250px;
+  left: 20%;
+  margin: auto;
+}
+
+.fadein-logos img {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation-name: fade1;
+  animation-iteration-count: infinite;
+  animation-duration: 7s;
+}
+
+.fadein-logos img {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -100px;
+  left: 255px;
+  animation-name: fade2;
+  animation-iteration-count: infinite;
+  animation-duration: 14s;
+}
+
+.fadein-logos img {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation-name: fade3;
+  animation-iteration-count: infinite;
+  animation-duration: 21s;
+}
+
+.fadein-logos img {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation-name: fade4;
+  animation-iteration-count: infinite;
+  animation-duration: 28s;
+}
+
+@keyframes fade1 {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 1;
+  }
+  53% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade2 {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 1;
+  }
+  53% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade3 {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 1;
+  }
+  53% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade4 {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 1;
+  }
+  53% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#f1 {
+  animation-delay: none;
+  background-color: none;
+}
+#f2 {
+  animation-delay: -7s;
+  background-color: none;
+}
+#f3 {
+  animation-delay: -14s;
+  background-color: none;
+}
+
+#f4 {
+  animation-delay: -21s;
+  background-color: none;
+}
+
+.footer {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  bottom: 0px;
+  width: 100%;
+  opacity: 75%;
+}

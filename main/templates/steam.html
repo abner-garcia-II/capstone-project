@@ -1,51 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Steam Games</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='steam.css') }}"
+    />
+  </head>
+  <body>
     <header>
-        <h1>Steam Owned Games</h1>
+      <h1>Steam Owned Games</h1>
     </header>
 
+    <form action="{{ url_for('get_steam_data') }}" method="POST">
+      <div class="userInput">
+        <h3>Enter Steam ID:</h3>
+        <input type="text" name="steamid" /><br />
+        <br /><input type="submit" value="Enter" /> <br />
+      </div>
+      <div class="errormsg">
+        <h5>{{ msg }}</h5>
+      </div>
+    </form>
+
     <main>
-        <section>
-            <h2>Your Games</h2>
+      <section>
+        <h2>Your Games</h2>
 
-            {% if games %}
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Game Name</th>
-                            <th>App ID</th>
-                            <th>Playtime (Hours)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for game in games %}
-                            <tr>
-                                <td>{{ game.name }}</td>
-                                <td>{{ game.appid }}</td>
-                                <td>{{ game.playtime_hours }} hours</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <p>No games found for this SteamID.</p>
-            {% endif %}
-        </section>
+        {% if games %}
+        <table>
+          <thead>
+            <tr>
+              <th>Game Name</th>
+              <th>App ID</th>
+              <th>Playtime (Hours)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for game in games %}
+            <tr>
+              <td>{{ game.name }}</td>
+              <td>{{ game.appid }}</td>
+              <td>{{ game.playtime_hours }} hours</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>No games found for this SteamID.</p>
+        {% endif %}
+      </section>
 
-        <section>
-            <a href="{{ url_for('home') }}">Go back to Home</a>
-        </section>
+      <section>
+        <a href="{{ url_for('home') }}">Go back to Home</a>
+      </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Game Data App</p>
+      <p>&copy; 2024 Game Data App</p>
     </footer>
-</body>
+  </body>
 </html>

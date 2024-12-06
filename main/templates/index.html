@@ -4,16 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css')}}"
+    />
   </head>
   <body>
-    <h3>
-      <u> Capstone Project </u>
-    </h3>
-    <ul>
-      <li><a href="riot">League of Legends Match History</a></li>
-      <li><a href="steam">Owned Steam Games Data</a></li>
-      <li><a href="fortnite">Fortnite Account Stats</a></li>
-      <li><a href="xbl">Xbox Live Account Stats</a></li>
-    </ul>
+    <h1>Capstone Project: Video Game and Platform Data Retriever</h1>
+
+    <nav class="navbar">
+      <ul>
+        <li><a href="riot">League of Legends Match History</a></li>
+        <li><a href="steam">Owned Steam Games Data</a></li>
+        <li><a href="fortnite">Fortnite Account Stats</a></li>
+        <li><a href="xbl">Xbox Live Account Stats</a></li>
+      </ul>
+    </nav>
+
+    <div class="logos">
+      <div class="fadein-logos">
+        <img id="f2" src="static/lollogo.png" alt="leagueoflegendslogo" />
+        <img id="f1" src="static/steamlogo.png" alt="steamlogo" />
+        <img id="f4" src="static/fortnitelogo.png" alt="fortnitelogo" />
+        <img id="f3" src="static/xbllogo.png" alt="xboxlogo" />
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>
+        By: Abner Garcia II, Alejandro Garcia, Danny Miguel, Imohimi Unuigbe
+      </p>
+    </div>
   </body>
 </html>

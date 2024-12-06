@@ -1,0 +1,92 @@
+.quicksand-googlefont {
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+* {
+  box-sizing: 0px;
+  margin: 0px;
+  padding: 0px;
+  font-family: "Quicksand", sans-serif;
+}
+
+.msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nametext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.namefield {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tagtext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tagfield {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.regtext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.regfield {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="text"] {
+  padding: 5px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+input[type="text"]:focus {
+  border-color: #333;
+  text-align: center;
+}
+
+input[type="submit"] {
+  padding: 5px 15px;
+  background: #00a2d3;
+  color: white;
+  border: 5px solid #00a2d3;
+  width: 100px;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.subbutton {
+  text-align: center;
+}
+
+.subbutton:hover {
+  color: black;
+}

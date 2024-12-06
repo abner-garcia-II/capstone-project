@@ -1,13 +1,85 @@
-.quicksand-font {
+.quicksand-googlefont {
   font-family: "Quicksand", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 300;
+  font-weight: 600;
   font-style: normal;
 }
 
 * {
-  box-sizing: 0;
-  margin: 0;
-  padding: 0;
+  box-sizing: 0px;
+  margin: 0px;
+  padding: 0px;
+  font-family: "Quicksand", sans-serif;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Quicksand", sans-serif;
+}
+
+.matchnumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Quicksand", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+#homebutton {
+  transform: translate(250%, 0%);
+  padding: 1rem 3rem;
+  border: none;
+  color: black;
+  background-color: rgb(221, 221, 221);
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+#searchbutton {
+  transform: translate(500%, 0%);
+  padding: 1rem 3rem;
+  border: none;
+  color: black;
+  background-color: rgb(221, 221, 221);
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+#topbutton {
+  transform: translate(390%, -50%);
+  padding: 1rem 3rem;
+  border: none;
+  color: black;
+  background-color: rgb(221, 221, 221);
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+button:hover {
+  color: white;
+  background-color: black;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: 20px auto;
+  font-family: "Quicksand", sans-serif;
+}
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  font-family: "Quicksand", sans-serif;
+}
+th {
+  background-color: #00b2be;
+  color: white;
   font-family: "Quicksand", sans-serif;
 }

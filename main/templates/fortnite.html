@@ -1,22 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoL</title>
-</head>
-<body>
-    <h1>
-        Fortnite Account Statistics
-    </h1>
-    <br/>
-    {% for stat in stats %}
-    <div class='stat'>
-            <h3>
-                {{ stat['username'] }}, {{ stat['score'] }}, {{ stat['matches'] }}, {{ stat['winRate'] }}, {{ stat['kdRatio'] }}
-            </h3>
-            <br>
-        </div>
-    {% endfor %}
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fortnite Stats</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 80%;
+        margin: 20px auto;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center">Fortnite Account Stats</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Score</th>
+          <th>Matches</th>
+          <th>Win Rate (%)</th>
+          <th>K/D Ratio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for stat in stats %}
+        <tr>
+          <td>{{ stat['username'] }}</td>
+          <td>{{ stat['score'] }}</td>
+          <td>{{ stat['matches'] }}</td>
+          <td>{{ stat['winRate'] }}</td>
+          <td>{{ stat['kdRatio'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
 </html>

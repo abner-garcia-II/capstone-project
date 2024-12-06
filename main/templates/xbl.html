@@ -1,22 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Steam</title>
-</head>
-<body>
-    <h1>
-        Xbox Live Profile Stats
-    </h1>
-    <br/>
-    {% for profile in profiles %}
-    <div class='profile'>
-            <h3>
-                {{ profile['gamertag'] }}, {{ profile['unique_modern_gamertag'] }}, {{ profile['gamerscore'] }}, {{ profile['follower_count'] }}, {{profile['following_count'] }}, {{ profile['has_game_pass'] }}
-            </h3>
-            <br>
-        </div>
-    {% endfor %}
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xbox Live Lookup</title>
+  </head>
+  <body>
+    <form action="{{ url_for('get_xbl_data') }}" method="POST">
+      <h1>Xbox Live Account Info</h1>
+      Gamertag:<br />
+      <input type="text" name='gtag' /><br />
+
+      <br /><input type="submit" value="Enter" />
+    </form>
+
+    <h2>
+      Account Details
+    </h2>
+    <br>
+
+    <div class="content">
+      <h3>
+        {{ 'Gamertag: ' + profiles['gamertag']}}
+      </h3>
+
+      <h3>
+        {{ 'Unique Modern Gamertag: ' + profiles['unique_modern_gamertag']}}
+      </h3>
+
+      <h3>
+        {{ 'Gamerscore: ' + profiles['gamerscore']}}
+      </h3>
+
+      <h3>
+        {{ 'Followers: ' + profiles['follower_count']}}
+      </h3>
+
+      <h3>
+        {{ 'Following: ' + profiles['following_count']}}
+      </h3>
+
+      <h3>
+        {{ 'Has Game Pass: ' + profiles['has_game_pass']}}
+      </h3>
+
+    </div>
+  </body>
 </html>

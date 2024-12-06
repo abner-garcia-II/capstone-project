@@ -5,21 +5,600 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LoL Match History</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='lol_styles.css')}}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a name="top"></a>
     <div class="logo">
         <h1>
             League of Legends Match History
         </h1>
     </div>
     <br>
-    {% for match in matches %}
-    <div class='matches'>
-        <h3>
-            {{ match['gamename'] }} {{ match['tagline'] }} {{ match['position'] }} {{ match['champname'] }} {{ match['teamcolor'] }} {{ match['totaldmgdealttochamps'] }}
-        </h3>
-        <br>
+    <div class="matchnumber">
+        <h2>Most Recent Match</h2>
     </div>
-    {% endfor %}
+    <button id="homebutton"><a href="home">Back to Home</a></button>
+    <button id="searchbutton"><a href="riot">Search User</a></button>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(0, 10) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Second Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(10, 20) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Third Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(20, 30) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Fourth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(30, 40) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Fifth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(40, 50) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Sixth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(50, 60) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Seventh Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(60, 70) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Eighth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(70, 80) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Nineth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(80, 90) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape")|safe }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape")|safe }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Tenth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(90, 100) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Eleventh Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(100, 110) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Twelfth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(110, 120) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Thirteenth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(120, 130) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Fourteenth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(130, 140) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Fifteenth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(140, 150) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Sixteenth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(150, 160) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Seventeenth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(160, 170) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Eighteenth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(170, 180) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Nineteenth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(180, 190) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <div class="matchnumber">
+        <h2>Twentieth Match</h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Gamename</th>
+                <th>Tagline</th>
+                <th>Position</th>
+                <th>Champion</th>
+                <th>Team</th>
+                <th>Total Damage Dealt to Champions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for match in range(190, 200) %}
+            <tr>
+                <td>{{ matches[match]['gamename'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['tagline'].encode().decode("unicode-escape") }}</td>
+                <td>{{ matches[match]['position'] }}</td>
+                <td>{{ matches[match]['champname'] }}</td>
+                <td>{{ matches[match]['teamcolor'] }}</td>
+                <td>{{ matches[match]['totaldmgdealttochamps'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <button id="topbutton"><a href="#top">Go Back to Top</a></button>
+    <br>
 </body>
 </html>
