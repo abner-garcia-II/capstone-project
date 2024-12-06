@@ -65,6 +65,11 @@ button:hover {
   background-color: black;
 }
 
+/*
+Only the code below was taken from and modified from ChatGPT. The rest of the code above is my own and of my design.
+-Abner Garcia II
+*/
+
 table {
   border-collapse: collapse;
   width: 80%;

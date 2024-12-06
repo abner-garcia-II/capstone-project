@@ -212,6 +212,8 @@ def insertMatchHistoryToDB(gameNameParam, tagLineParam, regionParam):
                 position = f'{json.dumps(data["info"]["participants"][player]["teamPosition"], indent=2).replace('"','')}'
                 if position == '':
                     position = 'NONE'
+                elif position == 'UTILITY':
+                    position = 'SUPPORT'
                 championName = f'{json.dumps(data["info"]["participants"][player]["championName"], indent=2).replace('"','')}'
                 teamId = f'{json.dumps(data["info"]["participants"][player]["teamId"], indent=2).replace('"','')}'
                 if teamId == '100':
@@ -238,7 +240,6 @@ def insertMatchHistoryToDB(gameNameParam, tagLineParam, regionParam):
                     position TEXT NOT NULL, champname TEXT NOT NULL, teamcolor TEXT NOT NULL, totaldmgdealttochamps INTEGER NOT NULL)'''
     cursor.execute(createQuery)
     cursor.execute(deleteQuery)
-    conn.commit()
     for line in lines:
         try:
             if response.status_code == 200:
@@ -259,12 +260,12 @@ def insertMatchHistoryToDB(gameNameParam, tagLineParam, regionParam):
                 totaldmgdealttochamps = lines[count]
                 count += 1
                 cursor.execute(insertQuery, (matchid, puuid, gamename, tagline, pos, champname, team, totaldmgdealttochamps))
-                conn.commit()
             else:
                 print(f"Failed to retrieve data. Status code: {response.status_code}")
                 print(response.text)
         except IndexError:
             print("Data successfully entered into database!")
+            conn.commit()
             conn.close()
             break
 
