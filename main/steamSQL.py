@@ -29,13 +29,13 @@ if response.status_code == 200:
     if owned_games:
         print(f"Owned Games for SteamID {steamID}:")
 
-        # Connect to SQLite
-        db = sqlite3.connect("steamdb.sqlite")
-        cursor = db.cursor()
+        # Connect to the existing SQLite database used in riot_sql.py
+        conn = sqlite3.connect('sqlite/main.db')  # Assuming the database file is in the 'sqlite' folder
+        cursor = conn.cursor()
 
-        # Create table if it doesn't exist
+        # Create table for owned games if it doesn't exist
         cursor.execute("""
-        CREATE TABLE IF NOT EXISTS owned_games (
+        CREATE TABLE IF NOT EXISTS steam_owned_games (
             steamID TEXT,
             appid INTEGER,
             name TEXT,
@@ -47,30 +47,25 @@ if response.status_code == 200:
         for game in owned_games:
             game_name = game.get('name', 'Name not available')
             playtime_minutes = game.get('playtime_forever', 0)
-            playtime_hours = playtime_minutes / 60
+            playtime_hours = playtime_minutes / 60  # Convert to hours
 
-            # Insert or replace game data
+            # Insert or replace game data into the steam_owned_games table
             cursor.execute("""
-            INSERT OR REPLACE INTO owned_games (steamID, appid, name, playtime_hours)
+            INSERT OR REPLACE INTO steam_owned_games (steamID, appid, name, playtime_hours)
             VALUES (?, ?, ?, ?)
             """, (steamID, game['appid'], game_name, playtime_hours))
 
             print(f"- {game_name} (App ID: {game['appid']}), Playtime: {playtime_hours:.2f} hours")
 
-        # Commit changes
-        db.commit()
+        # Commit changes to the database
+        conn.commit()
 
         print("\nGames have been successfully stored in the SQLite database.")
 
-        # Retrieve and print stored games
-        cursor.execute("SELECT name, appid, playtime_hours FROM owned_games WHERE steamID = ?", (steamID,))
-        for (name, appid, playtime_hours) in cursor.fetchall():
-            print(f"- {name} (App ID: {appid}), Playtime: {playtime_hours:.2f} hours")
-
         # Close the database connection
         cursor.close()
-        db.close()
+        conn.close()
     else:
-        print("No games found.")
+        print("No games found for this SteamID.")
 else:
     print(f"Error: {response.status_code} - {response.reason}")
